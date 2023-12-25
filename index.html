@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-
-<head></head>
-<div id="root"></div>
-<body style>
-</body>
-    <!-- 코딩 순서 : JS으로 변수를 만들고,reactJS가 html으로 번역 -->
-    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script>
-      const span = React.createElement("span", {id:"sexy-span", style:{color :"red"} }, "test");
-      const root = document.getElementById("root");
-      ReactDOM.render(span, root);
-    </script>
-
+  <head></head>
+  <div id="root"></div>
+  <body style></body>
+  <!-- 코딩 순서 : JS으로 변수를 만들고,reactJS가 html으로 번역 -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script>
+    let counter = 0;
+    const span = React.createElement(
+      "h3",
+      {
+        onMouseEnter: () => console.log("hello"),
+      },
+      "test"
+    );
+    const root = document.getElementById("root");
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => {
+          counter = counter + 1;
+          console.log("clicked!");
+        },
+      },
+      "click me"
+    );
+    const container = React.createElement("div", null, [span, btn]);
+    ReactDOM.render(container, root);
+  </script>
 </html>
