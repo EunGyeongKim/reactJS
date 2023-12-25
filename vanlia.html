@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <span>
+        Total clicks : 0
+    </span>
+    <button id="btn">
+        click me
+    </button>
+    <!-- 코딩 순서 변수만들기 -> 불러오기 -> html에서 수정하기 -->
+    <script>
+        let counter = 0;
+        const button = document.getElementById("btn");
+        const span = document.querySelector("span");
+
+        function handleClick(){
+            counter = counter +1;
+            span.innerText = `Total clicks : ${counter}`;
+
+
+        }
+
+        button.addEventListener("click", handleClick);
+    </script>
+</body>
+
+</html>
