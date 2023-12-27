@@ -7,26 +7,34 @@
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <script type="text/babel">
     const root = document.getElementById("root");
-    const title = (
-      <h3 id="title" onMouseEnter={() => console.log("mouse is enter!!!!")}>
-        here is title
-      </h3>
-    );
-    const button = (
-      <button
-        style={{
-          backgroundColor: "tomato",
-        }}
-        onClick={() => console.log("i;m clicked!!!")}
-      >
-        {" "}
-        cilck me{" "}
-      </button>
+    function Title1() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("mouuse is entered")}>
+          This is title
+        </h3>
+      );
+    }
+    const Button = () => {
+      return (
+        <button
+          style={{ backgroundColor: "tomato" }}
+          onClick={() => console.log("button is clicked")}
+        >
+          click me{" "}
+        </button>
+      );
+    };
+    const Container = () => (
+      <div>
+        <button>html button</button>
+        <Title1 />
+        <Button />
+      </div>
     );
 
-    const container = React.createElement("div", null, [title, button]);
-    ReactDOM.render(container, root);
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
