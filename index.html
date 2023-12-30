@@ -11,16 +11,25 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     function App() {
-      const data = React.useState(0);
-      const [counter, setCounter] = data;
-      const onClick = () => {
-        setCounter((current) => current + 1);
+      const [minutes, setMinutes] = React.useState();
+      const onChange = (event) => {
+        setMinutes(event.target.value);
       };
-      console.log("hi");
       return (
         <div>
-          <h3> totla clicks:{counter}</h3>
-          <button onClick={onClick}> click </button>
+          <h1 className="hi"> super converter</h1>
+          <label htmlFor="minutes"> Minutes </label>
+          <input
+            id="minutes"
+            value={minutes}
+            placeholder="Minutes"
+            tpye="number"
+            onChange={onChange}
+          />
+          <h4> tou want to convert {event.target.value} </h4>
+
+          <label htmlFor="hours"> Hours </label>
+          <input id="hours" value="hours" placeholder="Hours" type="number" />
         </div>
       );
     }
