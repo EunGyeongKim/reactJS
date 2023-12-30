@@ -10,15 +10,17 @@
 
   <script type="text/babel">
     const root = document.getElementById("root");
-
     function App() {
       const data = React.useState(0);
-      const [counter, modifier] = data;
+      const [counter, setCounter] = data;
+      const onClick = () => {
+        setCounter(counter + 1);
+      };
       console.log("hi");
       return (
         <div>
           <h3> totla clicks:{counter}</h3>
-          <button> click </button>
+          <button onClick={onClick}> click </button>
         </div>
       );
     }
