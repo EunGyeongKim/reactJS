@@ -9,27 +9,32 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    function Btn({ text, x, y, big }) {
+    function Btn({ text, onClick }) {
+      console.log(text, "was rendered");
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 10,
             borderRadius: 10,
-            fontSize: big ? 28 : 16,
+            fontSize: 16,
           }}
         >
           {text}
         </button>
       );
     }
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      const [value, setValue] = React.useState("save change");
+      const changeValue = () => setValue("revert change");
       return (
         <div>
-          <Btn text="save change" x={false} big={false} />
-          <Btn text="continue" y={9} big={true} />
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="continue" />
         </div>
       );
     }
