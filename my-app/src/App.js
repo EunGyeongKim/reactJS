@@ -3,15 +3,9 @@ import { useState, useEffect, useInsertionEffect } from "react";
 function App() {
   const [loading, setLoading] = useState(true);
   const [coins, setCoins] = useState([]);
-  const [resultCoin, setResultCoin] = useState(0);
-  const [selectCoins, setselectCoins] = useState([]);
   const [dallors, setDallors] = useState(0);
-  const dallorsOnChange = (event) => setDallors(event.target.value);
-
-  const coinChange = (event) => setselectCoins(event.target.value);
-
-  const onClick = (event) => {
-    setResultCoin((preCoin) => selectCoins / dallors);
+  const dallorsOnChange = (event) => {
+    setDallors(event.target.value);
   };
 
   useEffect(() => {
@@ -24,30 +18,27 @@ function App() {
   }, []);
   return (
     <div>
-      <h1> The coins! ({coins.length})</h1>
+      <h1> The coins! {loading ? "" : `(${coins.length})`}</h1>
+
+      <input
+        value={dallors}
+        onChange={dallorsOnChange}
+        type="text"
+        placeholder="input your dallors"
+      ></input>
 
       {loading ? (
         <strong> loading..... </strong>
       ) : (
-        <select onChange={coinChange}>
-          <option value={1}>--- Select coin ---</option>
+        <li>
           {coins.map((coin, index) => (
             <option key={index} value={coin.quotes.USD.price}>
               {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
+              {dallors == "" ? "" : ` / ${dallors / coin.quotes.USD.price}`}
             </option>
           ))}
-        </select>
+        </li>
       )}
-      <div>
-        <input
-          value={dallors}
-          onChange={dallorsOnChange}
-          type="text"
-          placeholder="input your dallors"
-        ></input>
-        <button onClick={onClick}> convert! </button>
-        <text value={resultCoin}> convert : {resultCoin} </text>
-      </div>
     </div>
   );
 }
