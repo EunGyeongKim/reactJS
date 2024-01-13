@@ -1,35 +1,53 @@
 import { useState, useEffect, useInsertionEffect } from "react";
 
 function App() {
-  const [todo, setTodo] = useState("");
-  const [toDos, setToDos] = useState([]);
-  const onChange = (event) => setTodo(event.target.value);
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (todo === "") {
-      return;
-    }
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [resultCoin, setResultCoin] = useState(0);
+  const [selectCoins, setselectCoins] = useState([]);
+  const [dallors, setDallors] = useState(0);
+  const dallorsOnChange = (event) => setDallors(event.target.value);
 
-    setToDos((currentArray) => [todo, ...currentArray]);
-    setTodo("");
+  const coinChange = (event) => setselectCoins(event.target.value);
+
+  const onClick = (event) => {
+    setResultCoin((preCoin) => selectCoins / dallors);
   };
 
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json);
+        setLoading(false);
+      });
+  }, []);
   return (
     <div>
-      <h1>my to dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
+      <h1> The coins! ({coins.length})</h1>
+
+      {loading ? (
+        <strong> loading..... </strong>
+      ) : (
+        <select onChange={coinChange}>
+          <option value={1}>--- Select coin ---</option>
+          {coins.map((coin, index) => (
+            <option key={index} value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
+            </option>
+          ))}
+        </select>
+      )}
+      <div>
         <input
-          onChange={onChange}
-          value={todo}
+          value={dallors}
+          onChange={dallorsOnChange}
           type="text"
-          placeholder="write your to do..."
-        />
-        <button> Add todo</button>
-      </form>
-      <hr />
-      {toDos.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
+          placeholder="input your dallors"
+        ></input>
+        <button onClick={onClick}> convert! </button>
+        <text value={resultCoin}> convert : {resultCoin} </text>
+      </div>
     </div>
   );
 }
