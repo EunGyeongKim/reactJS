@@ -30,7 +30,7 @@ function App() {
       {loading ? (
         <strong> loading..... </strong>
       ) : (
-        <li>
+        <li style={{ listStyleType: "none" }}>
           {coins.map((coin, index) => (
             <option key={index} value={coin.quotes.USD.price}>
               {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
