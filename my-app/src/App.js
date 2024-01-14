@@ -30,14 +30,16 @@ function App() {
       {loading ? (
         <strong> loading..... </strong>
       ) : (
-        <li style={{ listStyleType: "none" }}>
-          {coins.map((coin, index) => (
-            <option key={index} value={coin.quotes.USD.price}>
-              {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
-              {dallors == "" ? "" : ` / ${dallors / coin.quotes.USD.price}`}
-            </option>
-          ))}
-        </li>
+        coins.map((coin, index) => (
+          <li
+            style={{ listStyleType: "none" }}
+            key={index}
+            value={coin.quotes.USD.price}
+          >
+            {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price}
+            {dallors == "" ? "" : ` / ${dallors / coin.quotes.USD.price}`}
+          </li>
+        ))
       )}
     </div>
   );
